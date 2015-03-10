@@ -7,4 +7,11 @@ Cassandra explorer using node js
 
 ``npm install``
 
-``supervisor DEBUG=cassandra-explorer:* ./bin/www``
+if you have supervisor installed then use following command
+
+``supervisor DEBUG=cassandra-explorer:* ./bin/www`` 
+
+otherwise use following command
+
+``DEBUG=cassandra-explorer:* ./bin/www`` 
+
