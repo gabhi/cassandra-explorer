@@ -20,11 +20,6 @@ router.get('/:keyspace_name', function(req, res, next) {
     var keyspace_name = req.params.keyspace_name;
     var query = "select columnfamily_name from system.schema_columnfamilies where keyspace_name = '" + keyspace_name + "'";
     client.execute(query, function(err, result) {
-        console.log(err);
-        console.log("********" + keyspace_name);
-        console.log(JSON.stringify(result));
-        console.log("********");
-
         res.render('list_tables', {
             title: "Table listings for keyspace ",
             keyspace_name: keyspace_name,
@@ -43,7 +38,6 @@ router.get('/:keyspace_name/:table_name', function(req, res, next) {
         console.log(err);
         // console.log(JSON.stringify(result.row[0]));
         if (result && result.rows && result.rows.length > 0) {
-            console.log(Object.keys(result.rows[0]));
             var fields = Object.keys(result.rows[0]);
             res.render('table_data', {
                 title: "Table  " + final_table_name,
