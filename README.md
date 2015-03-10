@@ -15,3 +15,7 @@ otherwise use following command
 
 ``DEBUG=cassandra-explorer:* ./bin/www`` 
 
+
+then visit
+
+[http://localhost:3000/](http://localhost:3000/)
