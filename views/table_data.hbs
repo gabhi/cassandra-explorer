@@ -1,0 +1,17 @@
+<table class="table table-hover table-bordered">
+	<tr>
+		<th>#</th>
+		{{#each fields}}
+		<th>{{this}}</th>
+		{{/each}}
+		
+	</tr>
+	{{#each data.rows}}
+	<tr>
+		<td>{{@index}}</td>
+		{{#each this}}
+		<td>{{this}}</td>
+		{{/each}}
+	</tr>
+	{{/each}}
+</table>

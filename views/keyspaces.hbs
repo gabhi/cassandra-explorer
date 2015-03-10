@@ -1,0 +1,15 @@
+<table class="table table-hover table-bordered">
+	<tr><th>#</th>
+	<th>
+		Keyspace Name
+	</th>
+</tr>
+{{#each data.rows}}
+<tr>
+	<td>{{@index}}</td>
+	<td>
+		<a href="/keyspaces/{{this.keyspace_name}}">{{this.keyspace_name}}</a>
+	</td>
+</tr>
+{{/each}}
+</table>
