@@ -1,18 +1,18 @@
 <form class="form-inline" method="POST" action="/keyspaces">
-  <div class="form-group">
-    <label for="keyspace_name">Keyspace Name</label>
-    <input type="text" class="form-control" id="keyspace_name" name="keyspace_name" placeholder="Keyspace Name" required>
-  </div>
-  <button type="submit" class="btn btn-default">Create new keyspace</button>
+	<div class="form-group">
+		<label for="keyspace_name">Keyspace Name</label>
+		<input type="text" class="form-control" id="keyspace_name" name="keyspace_name" placeholder="Keyspace Name" required>
+	</div>
+	<button type="submit" class="btn btn-default">Create new keyspace</button>
 </form>
-
-
-
+<br />
+<br />
 <table class="table table-hover table-bordered">
 	<tr><th>#</th>
 	<th>
 		Keyspace Name
 	</th>
+	<th></th>
 </tr>
 {{#each data.rows}}
 <tr>
@@ -20,6 +20,23 @@
 	<td>
 		<a href="/keyspaces/{{this.keyspace_name}}">{{this.keyspace_name}}</a>
 	</td>
+	<td><button class="btn btn-danger" onclick="drop_keyspace('{{this.keyspace_name}}')">Drop</button></td>
 </tr>
 {{/each}}
 </table>
+<script type="text/javascript">
+			drop_keyspace =function  (name) {
+				
+				r = confirm("are you sure you want to drop keyspace ?");
+				if(r){
+				$.ajax({
+					url: "/keyspaces/"+name,
+					type: 'DELETE',
+					success: function(result) {
+						location.reload();
+					}
+				});
+					//window.location = ;
+				}
+			};
+</script>

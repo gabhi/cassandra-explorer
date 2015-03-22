@@ -39,6 +39,20 @@ router.get('/:keyspace_name', function(req, res, next) {
 
 });
 
+router.delete('/:keyspace_name', function(req, res, next) {
+    console.log("delete request==" + req.params.keyspace_name);
+
+    var keyspace_name = req.params.keyspace_name;
+    var query = "DROP KEYSPACE " + keyspace_name + "";
+    client.execute(query, function(err, result) {
+        res.send("delete");
+
+    });
+
+});
+
+
+
 router.get('/:keyspace_name/:table_name', function(req, res, next) {
     console.log(req.query.page + "==" + req.query.limit);
 
