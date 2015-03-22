@@ -5,14 +5,6 @@ var config = require('../config')
 
 var client = new cassandra.Client(config.cassandra);
 
-
-// var query = 'SELECT * FROM supplier_info';
-// client.execute(query, function(err, result) {
-//   console.log(JSON.stringify(result));
-// });
-
-
-/* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Cassandra Explorer' });
 });

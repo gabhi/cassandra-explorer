@@ -14,7 +14,6 @@ router.get('/', function(req, res, next) {
             data: result
         });
     });
-
 });
 
 router.post('/', function(req, res, next) {
@@ -25,8 +24,6 @@ router.post('/', function(req, res, next) {
 });
 
 router.get('/:keyspace_name', function(req, res, next) {
-    console.log(req.query.page + "==" + req.query.limit);
-
     var keyspace_name = req.params.keyspace_name;
     var query = "select columnfamily_name from system.schema_columnfamilies where keyspace_name = '" + keyspace_name + "'";
     client.execute(query, function(err, result) {
@@ -36,33 +33,49 @@ router.get('/:keyspace_name', function(req, res, next) {
             data: result
         });
     });
-
 });
 
 router.delete('/:keyspace_name', function(req, res, next) {
-    console.log("delete request==" + req.params.keyspace_name);
-
     var keyspace_name = req.params.keyspace_name;
     var query = "DROP KEYSPACE " + keyspace_name + "";
     client.execute(query, function(err, result) {
         res.send("delete");
 
     });
+});
 
+router.delete('/:keyspace_name/:table_name', function(req, res, next) {
+    var keyspace_name = req.params.keyspace_name;
+
+    var table_name = req.params.table_name;
+
+    var query = "DROP TABLE " + keyspace_name + "." + table_name;
+    client.execute(query, function(err, result) {
+        res.send("delete");
+
+    });
+});
+
+
+router.get('/:keyspace_name/:table_name/truncate', function(req, res, next) {
+    var keyspace_name = req.params.keyspace_name;
+    var table_name = req.params.table_name;
+    var query = "TRUNCATE  " + keyspace_name + "." + table_name;
+    client.execute(query, function(err, result) {
+        res.send("delete");
+
+    });
 });
 
 
 
 router.get('/:keyspace_name/:table_name', function(req, res, next) {
-    console.log(req.query.page + "==" + req.query.limit);
-
     var keyspace_name = req.params.keyspace_name;
     var table_name = req.params.table_name;
     var final_table_name = keyspace_name + "." + table_name;
     var query = "select * from " + final_table_name + " Limit 5";
     client.execute(query, function(err, result) {
         console.log(err);
-        console.log(JSON.stringify(result));
         if (result && result.rows && result.rows.length > 0) {
             console.log("last id: " + result.rows.slice(-1)[0].id);
 
@@ -86,6 +99,4 @@ router.get('/:keyspace_name/:table_name', function(req, res, next) {
 
 });
 
-
-//select columnfamily_name from system.schema_columnfamilies where keyspace_name = 'test';
 module.exports = router;

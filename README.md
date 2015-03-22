@@ -24,13 +24,14 @@ then visit
 
 ##Current Features
 1. Show keyspaces
-2. Show table names for give keyspace
-3. Show table data from give table
+2. Create Keyspace
+3. Delete Keyspace
+4. Show table names for given keyspace
+5. Show table data from given table
+6. Truncate Table
+7. Drop Table
 
 ## TODO
-1. Create Keyspace
-2. Delete Keyspace
-3. Truncate Table
-4. Drop Table
+
 5. Delete Rows
 6. Search by ID (Table)

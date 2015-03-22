@@ -3,6 +3,7 @@
 	<th>
 		Table Name
 	</th>
+	<th></th>
 	
 </tr>
 {{#each data.rows}}
@@ -11,7 +12,45 @@
 	<td>
 		<a href="/keyspaces/{{../keyspace_name}}/{{columnfamily_name}}">{{columnfamily_name}}</a>
 	</td>
-	
+	<td><button class="btn btn-danger" onclick="truncate_table('{{../keyspace_name}}/{{columnfamily_name}}')">Truncate</button>
+
+	<button class="btn btn-danger" onclick="drop_table('{{../keyspace_name}}/{{columnfamily_name}}')">Drop</button>
+
+
+	</td>
 </tr>
 {{/each}}
 </table>
+
+
+ <script type="text/javascript">
+			drop_table =function  (name) {
+				
+				r = confirm("are you sure you want to drop table ?");
+				if(r){
+				$.ajax({
+					url: "/keyspaces/"+name,
+					type: 'DELETE',
+					success: function(result) {
+						location.reload();
+					}
+				});
+					//window.location = ;
+				}
+			};
+
+			truncate_table =function  (name) {
+				
+				r = confirm("are you sure you want to truncate table ?");
+				if(r){
+				$.ajax({
+					url: "/keyspaces/"+name+"/truncate",
+					type: 'GET',
+					success: function(result) {
+						//location.reload();
+					}
+				});
+					//window.location = ;
+				}
+			};
+</script>
