@@ -8,9 +8,11 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var keyspaces = require('./routes/keyspaces');
+var paginate = require('express-paginate');
 
 
 var app = express();
+app.use(paginate.middleware(10, 50));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
